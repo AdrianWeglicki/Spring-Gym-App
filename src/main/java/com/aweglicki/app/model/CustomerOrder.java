@@ -22,6 +22,4 @@ public class CustomerOrder implements Serializable{
     @OneToOne
     private Customer customer;
 
-    CustomerOrder(){}
-
 }

@@ -16,5 +16,4 @@ public class Product implements Serializable {
     private long productId;
     private String productName;
     private Double productPrice;
-    Product(){}
 }
