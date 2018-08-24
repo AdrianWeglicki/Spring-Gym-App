@@ -1,4 +1,4 @@
-package com.aweglicki.app.repository;
+package com.aweglicki.app.repositories;
 
 import com.aweglicki.app.model.Customer;
 import org.springframework.data.repository.CrudRepository;

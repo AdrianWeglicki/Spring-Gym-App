@@ -3,12 +3,11 @@ package com.aweglicki.app.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Data
 @Entity
-public class CustomerOrder implements Serializable{
+public class CustomerOrder{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
