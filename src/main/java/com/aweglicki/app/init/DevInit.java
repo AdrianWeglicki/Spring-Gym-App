@@ -34,17 +34,27 @@ public class DevInit implements ApplicationListener<ContextRefreshedEvent> {
         oneMonth.setProductName("1 month");
         oneMonth.setProductPrice(30.00);
 
+        Product threeMonths = new Product();
+        threeMonths.setProductName("3 months");
+        threeMonths.setProductPrice(85.00);
+
+        Product sixMonths = new Product();
+        sixMonths.setProductName("6 months");
+        sixMonths.setProductPrice(160.00);
+
+        Product  twelveMonths = new Product();
+        twelveMonths.setProductName("12 months");
+        twelveMonths.setProductPrice(290.00);
+
         Product proteinPortion = new Product();
         proteinPortion.setProductName("Protein portion");
         proteinPortion.setProductPrice(1.00);
 
-        Customer customer = new Customer();
-        customer.setFirstName("Ethan");
-        customer.setLastName("Rist");
-
         productRepository.save(singleSession);
         productRepository.save(oneMonth);
+        productRepository.save(threeMonths);
+        productRepository.save(sixMonths);
+        productRepository.save(twelveMonths);
         productRepository.save(proteinPortion);
-        customerRepository.save(customer);
     }
 }

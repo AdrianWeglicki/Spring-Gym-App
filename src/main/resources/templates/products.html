@@ -94,7 +94,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-sm-6">
-                    <form id="register-form">
+                    <form>
                         <div class="form-group">
                             <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product name"/>
                         </div>
@@ -111,5 +111,54 @@
 </div>
 <!-- Footer -->
 <div th:replace="fragments/footer :: footer">...</div>
+
+<script type="application/javascript">
+    //add product button handler
+    $('#btn_submit').on("click",function (e) {
+        e.preventDefault();
+        var productName, productPrice;
+        productName = $('#product_name').val();
+        productPrice = $('#product_price').val();
+        var data = {};
+        data["productName"] = productName;
+        data["productPrice"] = productPrice;
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/saveproduct",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            timeout: 6000,
+            success: function (data) {
+                if (confirm("Product with name " + data + " is addeds")){
+                    window.location.reload();
+                }
+            }
+        });
+
+    });
+
+    //delete product button handler
+    $('.delete-product').on("click", function(e){
+        e.preventDefault();
+        if(confirm("Are you sure the product is delete?")){
+            var id = parseInt($(this).closest("td").attr("id"));
+            $.ajax({
+                type:"POST",
+                url:"/removeproduct",
+                data:{id:id},
+                success:function (data) {
+                    $(".delete-order").closest("td#"+data).parent("tr").fadeOut("slow",function(){
+                        $(".delete-product").closest("td#"+data).parent("tr").remove();
+                    });
+                    if (confirm("Product with name " + data + " is deleted")){
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
