@@ -28,8 +28,13 @@ public class OrdersController {
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String productsList(Model model) {
         model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("orders", customerOrderRepository.findAll());
         return "orders";
+    }
+
+    @RequestMapping(value = "/listOfOrders", method = RequestMethod.GET)
+    public String orderList(Model model){
+        model.addAttribute("orders", customerOrderRepository.findAll());
+        return "listOfOrders";
     }
 
     @RequestMapping(value = "/createorder", method = RequestMethod.POST)
