@@ -128,7 +128,7 @@
                                 </table>
                             </td>
                             <td th:text="${order.total}"></td>
-                            <td th:id="${order.orderId}"><button class="btn btn-danger delete-order">Complete Order</button></td>
+                            <td th:id="${order.orderId}"><button class="btn btn-danger delete-order">Delete Order</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -139,6 +139,26 @@
 </div>
 <!-- Footer -->
 <div th:replace="fragments/footer :: footer">...</div>
+
+<script>
+    //delete order button handler
+    $('.delete-order').on("click", function(e){
+        e.preventDefault();
+        if(confirm("Are you sure to delete order?")){
+            var id = parseInt($(this).closest("td").attr("id"));
+            $.ajax({
+                type:"POST",
+                url:"/removeorder",
+                data:{id:id},
+                success:function (data) {
+                    $(".delete-order").closest("td#"+data).parent("tr").fadeOut("slow",function(){
+                        $(".delete-order").closest("td#"+data).parent("tr").remove();
+                    });
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 public class CustomerOrder{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     private Double total;
 

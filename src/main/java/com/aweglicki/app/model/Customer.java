@@ -12,8 +12,8 @@ import javax.persistence.Id;
 public class Customer {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long customerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long customerId;
     private String firstName;
     private String lastName;
 }

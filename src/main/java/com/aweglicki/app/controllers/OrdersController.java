@@ -39,7 +39,7 @@ public class OrdersController {
 
     @RequestMapping(value = "/createorder", method = RequestMethod.POST)
     @ResponseBody
-    public String saveOrder(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(value = "productIds[]") Long[] productIds) {
+    public String saveOrder(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(value = "productsNames[]") String[] productNames) {
         Customer customer = new Customer();
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
@@ -47,13 +47,14 @@ public class OrdersController {
         CustomerOrder customerOrder = new CustomerOrder();
         customerOrder.setCustomer(customerRepository.findById(customer.getCustomerId()).orElse(null));
         Set<Product> productSet = new HashSet<>();
-        for (Long productId : productIds) {
-            productSet.add(productRepository.findById(productId).orElse(null));
+
+        for(String productName: productNames){
+            productSet.add(productRepository.findByProductName(productName));
         }
         customerOrder.setProducts(productSet);
         Double total = 0.0;
-        for (Long productId : productIds) {
-            Product product = productRepository.findById(productId).orElse(null);
+        for (Product product : productSet) {
+
             Double productPrice = 0.0;
             if(product != null){
                 productPrice = product.getProductPrice();
@@ -63,7 +64,7 @@ public class OrdersController {
         customerOrder.setTotal(total);
         customerOrderRepository.save(customerOrder);
 
-        return customerOrder.getOrderId().toString();
+        return String.valueOf(customerOrder.getOrderId());
     }
 
     @RequestMapping(value = "/removeorder", method = RequestMethod.POST)

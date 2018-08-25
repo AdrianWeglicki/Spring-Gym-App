@@ -1,6 +1,5 @@
 package com.aweglicki.app.init;
 
-import com.aweglicki.app.model.Customer;
 import com.aweglicki.app.model.Product;
 import com.aweglicki.app.repositories.CustomerRepository;
 import com.aweglicki.app.repositories.ProductRepository;
